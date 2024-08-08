@@ -7,11 +7,15 @@
 
 #include <ap/trans/c/c.hpp>
 
-namespace ap::trans::c          {
-    struct cmp                  {
-        static ops& cmp_eq(ops&);
-        static ops& cmp_ne(ops&);
+namespace ap::trans::c   {
+    struct cmp           {
+        ops& cmp_eq(ops&);
+        ops& cmp_ne(ops&);
     };
+}
+
+namespace ap::c              {
+    using cmp = trans::c::cmp;
 }
 
 #endif

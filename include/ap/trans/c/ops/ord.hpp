@@ -16,4 +16,8 @@ namespace ap::trans::c          {
     };
 }
 
+namespace ap::c              {
+    using ord = trans::c::ord;
+}
+
 #endif

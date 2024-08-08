@@ -7,7 +7,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::add_eq;
 
@@ -20,7 +19,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::sub_eq;
 
@@ -33,7 +31,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::mul_eq;
 
@@ -46,7 +43,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::div_eq;
 
@@ -59,7 +55,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::mod_eq;
 
@@ -72,7 +67,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::add;
 
@@ -85,7 +79,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::sub;
 
@@ -98,7 +91,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::mul;
 
@@ -111,7 +103,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::div;
 
@@ -124,7 +115,6 @@ namespace ap::trans::c {
             (ops& ops)                                       {
                 if (ops.self.has_value() == false) return ops;
                 if (ops.opc .has_value())          return ops;
-                if (ops.arg .has_value())          return ops;
                 if (ops.op  .has_value())          return ops;
                 ops.opc = ap::opc::mod;
 

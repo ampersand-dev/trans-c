@@ -7,20 +7,24 @@
 
 #include <ap/trans/c/c.hpp>
 
-namespace ap::trans::c          {
-    struct ari                  {
-        static ops& add_eq(ops&);
-        static ops& sub_eq(ops&);
-        static ops& div_eq(ops&);
-        static ops& mul_eq(ops&);
-        static ops& mod_eq(ops&);
+namespace ap::trans::c   {
+    struct ari           {
+        ops& add_eq(ops&);
+        ops& sub_eq(ops&);
+        ops& div_eq(ops&);
+        ops& mul_eq(ops&);
+        ops& mod_eq(ops&);
 
-        static ops& add(ops&);
-        static ops& sub(ops&);
-        static ops& div(ops&);
-        static ops& mul(ops&);
-        static ops& mod(ops&);
+        ops& add(ops&);
+        ops& sub(ops&);
+        ops& div(ops&);
+        ops& mul(ops&);
+        ops& mod(ops&);
     };
+}
+
+namespace ap::c              {
+    using ari = trans::c::ari;
 }
 
 #endif

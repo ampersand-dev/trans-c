@@ -9,196 +9,175 @@ namespace ap::trans::c {
 
             return str;
     }
+
+    var::var() {}
 }
 
 namespace ap::trans::c {
     var
         var::trait::pack
-            (var& var, str_t type, str_t name)   {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t type, str_t name)       {
                 if (type.empty()) return {};
                 if (name.empty()) return {};
+                var ret {};
 
                 using namespace std::string_literals;
-                var.type = "struct "s += type;
-                var.name = type;
+                ret.type = "struct "s += type;
+                ret.name = type;
 
-                var.str = var.type
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::f64
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "double";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "double";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::f32
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "float";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "float";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::u64
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "unsigned long long";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "unsigned long long";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::i64
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "long long";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "long long";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::u32
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "unsigned int";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "unsigned int";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::i32
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "int";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "int";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::u16
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "unsigned short";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "unsigned short";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::i16
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "short";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "short";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::u8
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "unsigned char";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "unsigned char";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 
     var
         var::trait::i8
-            (var& var, str_t name)               {
-                if (!var.type.empty()) return var;
-                if (!var.name.empty()) return var;
-                if (!var.str .empty()) return var;
-
+            (str_t name)                   {
                 if (name.empty()) return {};
-                var.type = "char";
-                var.name = name;
+                var ret {};
 
-                var.str = var.type
+                ret.type = "char";
+                ret.name = name;
+
+                ret.str = ret.type
                         + ' '
-                        + var.name;
-                return var;
+                        + ret.name;
+                return ret;
     }
 }

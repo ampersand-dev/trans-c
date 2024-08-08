@@ -19,34 +19,27 @@ namespace ap::trans::c                               {
         pack::as_str()                     {
                 if (name.empty()) return {};
                 if (str .empty()) return {};
-                return str;
+
+                std::string ret = str;
+                ret += "};";
+                return ret;
     }
 }
 
-namespace ap::trans::c {
-    void
-        pack::trait::push
-            (pack& pack, str_t name)                     {
-                if (!pack.name.empty()) pack.name.clear();
-                if (!pack.str .empty()) pack.str .clear();
+namespace ap::trans::c                                       {
+    pack
+        pack::trait::make
+            (str_t name)                                     {
+                if (name.find('\t') != str_t::npos) return {};
+                if (name.find(' ')  != str_t::npos) return {};
+                pack ret {};
 
-                if (name.find('\t') != str_t::npos) return;
-                if (name.find(' ')  != str_t::npos) return;
-                pack.name = name;
+                ret.name = name;
 
-                pack.str += "struct { \n";
-                return;
-    }
-
-    auto
-        pack::trait::pop
-            (pack& pack)                                                           {
-                if (pack.name.empty()) return std::optional<c::pack> (std::nullopt);
-                if (pack.str .empty()) return std::optional<c::pack> (std::nullopt);
-                pack.str += "};";
-
-                return std::optional<c::pack> (pack);
-                
+                ret.str += "struct ";
+                ret.str += name;
+                ret.str += " { \n";
+                return ret;
     }
 
     void 

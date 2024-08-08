@@ -30,23 +30,27 @@ namespace ap::trans::c                {
         using str_t = std::string_view;
         using ret_t = var;
 
-        static var pack(var&, str_t, str_t);
+        static var pack(str_t, str_t);
 
-        static var f64 (var&, str_t);
-        static var f32 (var&, str_t);
+        static var f64 (str_t);
+        static var f32 (str_t);
 
-        static var u64 (var&, str_t);
-        static var i64 (var&, str_t);
+        static var u64 (str_t);
+        static var i64 (str_t);
 
-        static var u32 (var&, str_t);
-        static var i32 (var&, str_t);
+        static var u32 (str_t);
+        static var i32 (str_t);
 
-        static var u16 (var&, str_t);
-        static var i16 (var&, str_t);
+        static var u16 (str_t);
+        static var i16 (str_t);
 
-        static var u8  (var&, str_t);
-        static var i8  (var&, str_t);
+        static var u8  (str_t);
+        static var i8  (str_t);
     };
+}
+
+namespace ap::c                                 {
+    using var = trans::var<trans::c::var::trait>;
 }
 
 #endif

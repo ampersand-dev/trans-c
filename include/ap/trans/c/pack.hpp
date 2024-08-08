@@ -2,6 +2,7 @@
 #define AP_TRANS_C_PACK_HPP
 
 #include <ap/trans/c/c.hpp>
+#include <ap/trans/trans.hpp>
 
 #include <optional>
 
@@ -26,8 +27,8 @@ namespace ap::trans::c           {
 namespace ap::trans::c                {
     struct pack::trait                {
         using str_t = std::string_view;
-        static void push(pack&, str_t);
-        static auto pop (pack&);
+        using ret_t = void;
+        static pack make(str_t);
 
         static void var (pack&, str_t, str_t);
 
@@ -46,6 +47,10 @@ namespace ap::trans::c                {
         static void i8  (pack&, str_t);
         static void u8  (pack&, str_t);
     };
+}
+
+namespace ap::c                                    {
+    using pack = trans::pack<trans::c::pack::trait>;
 }
 
 #endif

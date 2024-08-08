@@ -7,17 +7,24 @@
 
 #include <ap/trans/c/c.hpp>
 
-namespace ap::trans::c              {
-    struct bit                      {
-        static ops& bit_and_eq(ops&);
-        static ops& bit_or_eq (ops&);
-        static ops& bit_xor_eq(ops&);
+namespace ap::trans::c       {
+    struct bit               {
+        ops& bit_and_eq(ops&);
+        ops& bit_or_eq (ops&);
+        ops& bit_xor_eq(ops&);
 
-        static ops& bit_and(ops&);
-        static ops& bit_or (ops&);
-        static ops& bit_xor(ops&);
-        static ops& bit_not(ops&);
+        ops& bit_and(ops&);
+        ops& bit_or (ops&);
+        ops& bit_xor(ops&);
+        ops& bit_not(ops&);
+
+        ops& bit_shl(ops&);
+        ops& bit_shr(ops&);
     };
+}
+
+namespace ap::c              {
+    using bit = trans::c::bit;
 }
 
 #endif
