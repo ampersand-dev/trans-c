@@ -1,28 +1,19 @@
 #include <ap/trans/c/ops/cmp.hpp>
 #include <ap/trans/c/ops.hpp>
 
-namespace ap::trans::c {
-    ops&
-        cmp::cmp_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::cmp_eq;
+namespace ap::trans::c                              {
+    cmp::cmp(std::pmr::memory_resource* mre)
+        : mre (mre),
+          mem (mre)
+            {}
+    
+    cmp::cmp()
+        : mre (std::pmr::get_default_resource()),
+          mem (std::pmr::get_default_resource())
+            {}
+}
 
-                ops.op = std::string ("==");
-                return ops;
-    }
-
-    ops&
-        cmp::cmp_ne
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::cmp_ne;
-
-                ops.op = std::string ("!=");
-                return ops;
-    }
+namespace ap::trans::c                                                              {
+    ops cmp::cmp_eq() { bin* ret = mem.new_object<bin>("=="); return ops(ret, mre); }
+    ops cmp::cmp_ne() { bin* ret = mem.new_object<bin>("!="); return ops(ret, mre); }
 }

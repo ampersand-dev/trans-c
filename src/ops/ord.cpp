@@ -1,52 +1,21 @@
 #include <ap/trans/c/ops/ord.hpp>
 #include <ap/trans/c/ops.hpp>
 
-namespace ap::trans::c {
-    ops&
-        ord::ord_gt
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::ord_gt;
+namespace ap::trans::c                      {
+    ord::ord(std::pmr::memory_resource* mre)
+        : mre (mre),
+          mem (mre)
+            {}
 
-                ops.op = std::string (">");
-                return ops;
-    }
+    ord::ord()
+        : mre (std::pmr::get_default_resource()),
+          mem (std::pmr::get_default_resource())
+            {}
+}
 
-    ops&
-        ord::ord_ge
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::ord_ge;
-
-                ops.op = std::string (">=");
-                return ops;
-    }
-
-    ops&
-        ord::ord_lt
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::ord_lt;
-
-                ops.op = std::string ("<");
-                return ops;
-    }
-
-    ops&
-        ord::ord_le
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::ord_le;
-
-                ops.op = std::string ("<=");
-                return ops;
-    }
+namespace ap::trans::c                                                              {
+    ops ord::ord_gt() { bin* ret = mem.new_object<bin>(">") ; return ops(ret, mre); }
+    ops ord::ord_ge() { bin* ret = mem.new_object<bin>(">-"); return ops(ret, mre); }
+    ops ord::ord_lt() { bin* ret = mem.new_object<bin>("<") ; return ops(ret, mre); }
+    ops ord::ord_le() { bin* ret = mem.new_object<bin>("<="); return ops(ret, mre); }
 }

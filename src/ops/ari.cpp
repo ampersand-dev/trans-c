@@ -1,124 +1,27 @@
 #include <ap/trans/c/ops/ari.hpp>
-#include <ap/trans/c/ops.hpp>
 
-namespace ap::trans::c {
-    ops&
-        ari::add_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::add_eq;
+namespace ap::trans::c                       {
+    ari::ari (std::pmr::memory_resource* mre)
+        : mre (mre),
+          mem (mre)
+            {}
 
-                ops.op = std::string ("+=");
-                return ops;
-    }
+    ari::ari()
+        : mre (std::pmr::get_default_resource()),
+          mem (std::pmr::get_default_resource())
+            {}
+}
 
-    ops&
-        ari::sub_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::sub_eq;
+namespace ap::trans::c                                                                     {
+    ops ari::add_eq() { bin_eq* ret = mem.new_object<bin_eq>("+="); return ops (ret, mre); }
+    ops ari::sub_eq() { bin_eq* ret = mem.new_object<bin_eq>("-="); return ops (ret, mre); }
+    ops ari::mul_eq() { bin_eq* ret = mem.new_object<bin_eq>("*="); return ops (ret, mre); }
+    ops ari::div_eq() { bin_eq* ret = mem.new_object<bin_eq>("/="); return ops (ret, mre); }
+    ops ari::mod_eq() { bin_eq* ret = mem.new_object<bin_eq>("%="); return ops (ret, mre); }
 
-                ops.op = std::string ("-=");
-                return ops;
-    }
-
-    ops&
-        ari::mul_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::mul_eq;
-
-                ops.op = std::string ("*=");
-                return ops;
-    }
-
-    ops&
-        ari::div_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::div_eq;
-
-                ops.op = std::string ("/=");
-                return ops;
-    }
-
-    ops&
-        ari::mod_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::mod_eq;
-
-                ops.op = std::string ("%=");
-                return ops;
-    }
-
-    ops&
-        ari::add
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::add;
-
-                ops.op = std::string ("+");
-                return ops;
-    }
-
-    ops&
-        ari::sub
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::sub;
-
-                ops.op = std::string ("-");
-                return ops;
-    }
-
-    ops&
-        ari::mul
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::mul;
-
-                ops.op = std::string ("*");
-                return ops;
-    }
-
-    ops&
-        ari::div
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::div;
-
-                ops.op = std::string ("/");
-                return ops;
-    }
-
-    ops&
-        ari::mod
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::mod;
-
-                ops.op = std::string ("%");
-                return ops;
-    }
+    ops ari::add() { bin* ret = mem.new_object<bin>("+"); return ops (ret, mre); }
+    ops ari::sub() { bin* ret = mem.new_object<bin>("-"); return ops (ret, mre); }
+    ops ari::mul() { bin* ret = mem.new_object<bin>("*"); return ops (ret, mre); }
+    ops ari::div() { bin* ret = mem.new_object<bin>("/"); return ops (ret, mre); }
+    ops ari::mod() { bin* ret = mem.new_object<bin>("%"); return ops (ret, mre); }
 }

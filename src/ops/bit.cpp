@@ -1,112 +1,27 @@
 #include <ap/trans/c/ops/bit.hpp>
-#include <ap/trans/c/ops.hpp>
 
-namespace ap::trans::c {
-    ops&
-        bit::bit_and_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_and_eq;
+namespace ap::trans::c                       {
+    bit::bit (std::pmr::memory_resource* mre)
+        : mre (mre),
+          mem (mre)
+            {}
 
-                ops.op = std::string ("&=");
-                return ops;
-    }
+    bit::bit()
+        : mre (std::pmr::get_default_resource()),
+          mem (std::pmr::get_default_resource())
+            {}
+}
 
-    ops&
-        bit::bit_or_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_or_eq;
+namespace ap::trans::c                                                                         {
+    ops bit::bit_and_eq() { bin_eq* ret = mem.new_object<bin_eq>("&="); return ops (ret, mre); }
+    ops bit::bit_xor_eq() { bin_eq* ret = mem.new_object<bin_eq>("|="); return ops (ret, mre); }
+    ops bit::bit_or_eq () { bin_eq* ret = mem.new_object<bin_eq>("^="); return ops (ret, mre); }
+    
+    ops bit::bit_shl() { bin* ret = mem.new_object<bin>("<<"); return ops (ret, mre); }
+    ops bit::bit_shr() { bin* ret = mem.new_object<bin>(">>"); return ops (ret, mre); }
 
-                ops.op = std::string ("|=");
-                return ops;
-    }
-
-    ops&
-        bit::bit_xor_eq
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_xor_eq;
-
-                ops.op = std::string ("^=");
-                return ops;
-    }
-
-    ops&
-        bit::bit_and
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_and;
-
-                ops.op = std::string ("&");
-                return ops;
-    }
-
-    ops&
-        bit::bit_or
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_or;
-
-                ops.op = std::string ("|");
-                return ops;
-    }
-
-    ops&
-        bit::bit_xor
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_xor;
-
-                ops.op = std::string ("^");
-                return ops;
-    }
-
-    ops&
-        bit::bit_not
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_not;
-                ops.op  = std::string("~");
-
-                return ops;
-    }
-
-    ops&
-        bit::bit_shl
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_shl;
-
-                ops.op = std::string ("<<");
-                return ops;
-    }
-
-    ops&
-        bit::bit_shr
-            (ops& ops)                                       {
-                if (ops.self.has_value() == false) return ops;
-                if (ops.opc .has_value())          return ops;
-                if (ops.op  .has_value())          return ops;
-                ops.opc = ap::opc::bit_shr;
-
-                ops.op  = std::string(">>");
-                return ops;
-    }
+    ops bit::bit_and() { bin* ret = mem.new_object<bin>("&"); return ops (ret, mre); }
+    ops bit::bit_xor() { bin* ret = mem.new_object<bin>("^"); return ops (ret, mre); }
+    ops bit::bit_or () { bin* ret = mem.new_object<bin>("|"); return ops (ret, mre); }
+    ops bit::bit_not() { uni* ret = mem.new_object<uni>("~"); return ops (ret, mre); }
 }
