@@ -1,7 +1,7 @@
 #ifndef AP_TRANS_C_FN_HPP
 #define AP_TRANS_C_FN_HPP
 
-#include <ap/trans/c/c.hpp>
+#include <ap/trans/c/ops.hpp>
 #include <ap/trans/trans.hpp>
 #include <ap/meta/meta.hpp>
 
@@ -11,40 +11,31 @@
 
 #include <list>
 
-namespace ap::trans::c                       {
-    class fn                                 {
-        using arg_t = std::list <std::string>;
+namespace ap::trans::c           {
+    class fn                     {
         using str_t = std::string;
         str_t name;
-        str_t ret;
-        arg_t arg;
-        str_t src;
-
-        fn(std::string_view);
+        str_t fret;
+        str_t farg;
+        str_t fsrc;
     public:
-        std::string as_str();
-        struct trait;
+        fn(std::string_view);
+        fn();
+        std::string head();
+        std::string all ();
+
+        void arg(meta::type_id   , std::string_view);
+        void arg(std::string_view, std::string_view);
+
+        void ret(meta::type_id);
+        void ret(std::string_view);
+
+        void src(ops);
     };
 }
 
-namespace ap::trans::c                {
-    struct fn::trait                  {
-        using str_t = std::string_view;
-
-        static fn make(str_t);
-
-        static void arg (fn&, meta::type_id, str_t);
-        static void arg (fn&, str_t, str_t);
-
-        static void ret (fn&, meta::type_id);
-        static void ret (fn&, str_t);
-
-        static void src(fn&, ops);
-    };
-}
-
-namespace ap::c                   {
-    using fn = trans::c::fn::trait;
+namespace ap::c            {
+    using fn = trans::c::fn;
 }
 
 #endif
