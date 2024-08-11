@@ -4,13 +4,14 @@
 namespace ap::trans::c {
     class ops;
 
-    struct boolean;
-    struct func;
-    struct ari;
-    struct bit;
-    struct cmp;
-    struct ord;
-    struct mem;
+    class boolean;
+    class control;
+    class func;
+    class ari;
+    class bit;
+    class cmp;
+    class ord;
+    class mem;
 }
 
 #endif
