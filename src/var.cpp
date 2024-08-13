@@ -14,7 +14,12 @@ namespace ap::trans::c {
 }
 
 namespace ap::trans::c {
-    var
+    var::trait::ret_t
+        var::trait::err()      {
+            return std::nullopt;
+    }
+
+    var::trait::ret_t
         var::trait::pack
             (str_t type, str_t name)       {
                 if (type.empty()) return {};
@@ -23,7 +28,7 @@ namespace ap::trans::c {
 
                 using namespace std::string_literals;
                 ret.type = "struct "s += type;
-                ret.name = type;
+                ret.name = name;
 
                 ret.str = ret.type
                         + ' '
@@ -31,7 +36,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::f64
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -46,7 +51,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::f32
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -61,7 +66,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::u64
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -76,7 +81,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::i64
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -91,7 +96,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::u32
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -106,7 +111,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::i32
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -121,7 +126,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::u16
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -136,7 +141,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::i16
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -151,7 +156,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::u8
             (str_t name)                   {
                 if (name.empty()) return {};
@@ -166,7 +171,7 @@ namespace ap::trans::c {
                 return ret;
     }
 
-    var
+    var::trait::ret_t
         var::trait::i8
             (str_t name)                   {
                 if (name.empty()) return {};
