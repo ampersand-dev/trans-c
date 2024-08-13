@@ -18,39 +18,27 @@ namespace ap::trans::c           {
         str_t name;
         str_t str;
     public:
-        std::fstream as_file(std::filesystem::path);
+        pack(std::string_view);
+
         std::string  as_str ();
-        struct trait;  
+
+        void var (std::string_view, std::string_view);
+
+        void f64 (std::string_view);
+        void f32 (std::string_view);
+
+        void i64 (std::string_view);
+        void u64 (std::string_view);
+
+        void i32 (std::string_view);
+        void u32 (std::string_view);
+
+        void i16 (std::string_view);
+        void u16 (std::string_view);
+
+        void i8  (std::string_view);
+        void u8  (std::string_view);
     };
-}
-
-namespace ap::trans::c                {
-    struct pack::trait                {
-        using str_t = std::string_view;
-        using ret_t = void;
-        static pack make(str_t);
-
-        static void var (pack&, str_t, str_t);
-
-        static void f64 (pack&, str_t);
-        static void f32 (pack&, str_t);
-
-        static void i64 (pack&, str_t);
-        static void u64 (pack&, str_t);
-
-        static void i32 (pack&, str_t);
-        static void u32 (pack&, str_t);
-
-        static void i16 (pack&, str_t);
-        static void u16 (pack&, str_t);
-
-        static void i8  (pack&, str_t);
-        static void u8  (pack&, str_t);
-    };
-}
-
-namespace ap::c                                    {
-    using pack = trans::pack<trans::c::pack::trait>;
 }
 
 #endif
