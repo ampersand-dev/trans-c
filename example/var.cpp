@@ -1,9 +1,4 @@
-#include <ap/trans/c/var.hpp>
-
-#include <ap/trans.hpp>
-#include <ap/trait.hpp>
-#include <ap/meta.hpp>
-#include <ap/core.hpp>
+#include <ap/trans/c.hpp>
 
 #include <iostream>
 
@@ -23,27 +18,15 @@ int main()                   {
     auto i64 = ap::let (ap::i64_t)("a");
     auto u64 = ap::let (ap::u64_t)("a");
 
-    auto i8s  = trans(i8);
-    auto u8s  = trans(u8);
+    std::cout << trans(i8) .value().as_str() << std::endl;
+    std::cout << trans(u8) .value().as_str() << std::endl;
 
-    auto i16s = trans(i16);
-    auto u16s = trans(u16);
+    std::cout << trans(i16).value().as_str() << std::endl;
+    std::cout << trans(u16).value().as_str() << std::endl;
 
-    auto i32s = trans(i32);
-    auto u32s = trans(u32);
+    std::cout << trans(i32).value().as_str() << std::endl;
+    std::cout << trans(u32).value().as_str() << std::endl;
 
-    auto i64s = trans(i64);
-    auto u64s = trans(u64);
-
-    std::cout << i8s .as_str() << std::endl;
-    std::cout << u8s .as_str() << std::endl;
-
-    std::cout << i16s.as_str() << std::endl;
-    std::cout << u16s.as_str() << std::endl;
-
-    std::cout << i32s.as_str() << std::endl;
-    std::cout << u32s.as_str() << std::endl;
-
-    std::cout << i64s.as_str() << std::endl;
-    std::cout << u64s.as_str() << std::endl;
+    std::cout << trans(i64).value().as_str() << std::endl;
+    std::cout << trans(u64).value().as_str() << std::endl;
 }
