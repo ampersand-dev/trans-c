@@ -1,167 +1,135 @@
 #include <ap/trans/c/pack.hpp>
 
-namespace ap::trans::c                               {
-    std::fstream
-        pack::as_file
-            (std::filesystem::path path)     {
-                if (name.empty())   return {};
-                if (str .empty())   return {};
-                std::fstream ret { path };
 
-                if (ret.good() == false) return ret;
-                if (ret.fail())          return ret;
-
-                ret << str;
-                return ret;
+namespace ap::trans::c {
+    pack::pack (std::string_view name)
+        : name (name) {
     }
 
     std::string
-        pack::as_str()                     {
-                if (name.empty()) return {};
-                if (str .empty()) return {};
+        pack::as_str()     {
+            std::string ret;
 
-                std::string ret = str;
-                ret += "};";
-                return ret;
+            ret += "struct "; 
+
+            ret += name; ret += " {\n";
+            ret += str;
+            
+            ret += "}\n";
+            return   ret;
     }
 }
 
-namespace ap::trans::c                                       {
-    pack
-        pack::trait::make
-            (str_t name)                                     {
-                if (name.find('\t') != str_t::npos) return {};
-                if (name.find(' ')  != str_t::npos) return {};
-                pack ret {};
+namespace ap::trans::c                                     {
+    void 
+        pack::var
+            (std::string_view type, std::string_view name) {
+                if (type.empty()) return;
+                if (name.empty()) return;
 
-                ret.name = name;
-
-                ret.str += "struct ";
-                ret.str += name;
-                ret.str += " { \n";
-                return ret;
+                str += "\tstruct ";
+                str += type;
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::var
-            (pack& pack, str_t type, str_t name) {
-                if (pack.name.empty()) return;
-                if (type.empty())      return;
-                if (name.empty())      return;
+        pack::f64
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "struct ";
-                pack.str += type;
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tdouble ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::f64
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::f32
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "double ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tfloat ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::f32
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::i64
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "float ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tlong long ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::i64
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::u64
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "long long ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tunsigned long long ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::u64
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::i32
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "unsigned long long ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tint ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::i32
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::u32
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "int ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tunsigned int ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::u32
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::i16
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "unsigned int ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tshort ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::i16
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::u16
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "short ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tunsigned short ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::u16
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::i8
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "unsigned short ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tchar ";
+                str += name;
+                str += ";\n";
     }
 
     void 
-        pack::trait::i8
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
+        pack::u8
+            (std::string_view name)     {
+                if (name.empty()) return;
 
-                pack.str += "char ";
-                pack.str += name;
-                pack.str += ";\n";
-    }
-
-    void 
-        pack::trait::u8
-            (pack& pack, str_t name)         {
-                if (pack.name.empty()) return;
-                if (name.empty())      return;
-
-                pack.str += "unsigned char ";
-                pack.str += name;
-                pack.str += ";\n";
+                str += "\tunsigned char ";
+                str += name;
+                str += ";\n";
     }
 }
