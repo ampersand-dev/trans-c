@@ -17,35 +17,36 @@ namespace ap::trans::c                                      {
         str_t type;
         str_t name;
         str_t str;
-
         var();
     public:
+        
         std::string as_str();
         struct trait;
     };
 }
 
-namespace ap::trans::c                {
-    struct var::trait                 {
+namespace ap::trans::c                  {
+    struct var::trait                   {
+        using ret_t = std::optional<var>;
         using str_t = std::string_view;
-        using ret_t = var;
+        
+        static ret_t pack(str_t, str_t);
+        static ret_t err ();
 
-        static var pack(str_t, str_t);
+        static ret_t f64 (str_t);
+        static ret_t f32 (str_t);
 
-        static var f64 (str_t);
-        static var f32 (str_t);
+        static ret_t u64 (str_t);
+        static ret_t i64 (str_t);
 
-        static var u64 (str_t);
-        static var i64 (str_t);
+        static ret_t u32 (str_t);
+        static ret_t i32 (str_t);
 
-        static var u32 (str_t);
-        static var i32 (str_t);
+        static ret_t u16 (str_t);
+        static ret_t i16 (str_t);
 
-        static var u16 (str_t);
-        static var i16 (str_t);
-
-        static var u8  (str_t);
-        static var i8  (str_t);
+        static ret_t u8  (str_t);
+        static ret_t i8  (str_t);
     };
 }
 
